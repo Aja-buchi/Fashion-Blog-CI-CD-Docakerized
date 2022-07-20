@@ -16,4 +16,11 @@ public class PostComments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
     private String message;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "userId"
+    )
+    private User user;
 }

@@ -3,6 +3,8 @@ package com.buchibanton.fashionblog.service.serviceImpl;
 import com.buchibanton.fashionblog.dto.AdminSignUpDto;
 import com.buchibanton.fashionblog.dto.PostDto;
 import com.buchibanton.fashionblog.dto.UpdatePostDto;
+import com.buchibanton.fashionblog.exceptions.AdminNotFoundException;
+import com.buchibanton.fashionblog.exceptions.InvalidEmailException;
 import com.buchibanton.fashionblog.exceptions.PostNotFoundException;
 import com.buchibanton.fashionblog.exceptions.UserNotFoundException;
 import com.buchibanton.fashionblog.model.*;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -26,6 +29,7 @@ public class AdminServiceImpl implements AdminService {
     private final PostLikesRepository postLikesRepository;
 
     private final PostCommentsRepository postCommentsRepository;
+    private final HttpSession httpSession;
 
     @Override
     public List<PostLikes> fetchLikes(){
@@ -38,13 +42,20 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Post> findAllPost() {
+    public List<Post> getAllPost() {
         return postRepository.findAll();
     }
 
     @Override
-    public Admin login(AdminSignUpDto adminSignUpDto) {
-        return null;
+    public String login(AdminSignUpDto adminSignUpDto) {
+        String email = adminSignUpDto.getEmail();
+        Admin admin = adminRepository.findByEmail(email).orElseThrow(()-> new AdminNotFoundException("Not found"));
+        if (!admin.getPassword().equals(adminSignUpDto.getPassword())){
+            throw new InvalidEmailException("Invalid email or password");
+        }
+        httpSession.setAttribute("found", adminSignUpDto.getEmail());
+        httpSession.setAttribute("granted", "admin");
+        return "Log in Successful";
     }
 
     @Override

@@ -9,9 +9,10 @@ public interface AdminService {
 
     List<PostLikes> fetchLikes();
     List<PostComments> fetchComments();
-    List<Post> findAllPost();
-    Admin login(AdminSignUpDto adminSignUpDto);
+//    List<Post> findAllPost();
+    String login(AdminSignUpDto adminSignUpDto);
     Post creatPost(PostDto postDto);
-    Post updatePost(UpdatePostDto updatePostDto, Long id);
-    void deletePost(Long id);
+    List<Post> getAllPost();
+    Post updatePost(UpdatePostDto updatePostDto, Long postId);
+    void deletePost(Long postId);
 }

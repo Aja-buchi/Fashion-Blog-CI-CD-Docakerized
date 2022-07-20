@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,4 +32,18 @@ public class User {
 
     @Size(min = 5, max = 15, message = "Password must be between 5 to 15 characters")
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(
+            name = "post_id",
+            referencedColumnName = "postId"
+    )
+    private List<Post> post;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(
+            name = "comment_id",
+            referencedColumnName = "commentId"
+    )
+    private List<PostComments> postComments;
 }

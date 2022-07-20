@@ -1,6 +1,8 @@
 package com.buchibanton.fashionblog.controller;
 
 import com.buchibanton.fashionblog.dto.UserSignUpDto;
+import com.buchibanton.fashionblog.exceptions.UserNotFoundException;
+import com.buchibanton.fashionblog.model.Post;
 import com.buchibanton.fashionblog.model.User;
 import com.buchibanton.fashionblog.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +28,17 @@ public class UserController {
     }
 
     @GetMapping("/fetchUsers/{id}")
-    public ResponseEntity<User> fetchUsers(@PathVariable("id") Long userId){
+    public ResponseEntity<User> fetchUsers(@PathVariable("id") Long userId) throws UserNotFoundException {
         return new ResponseEntity<>(userService.fetchUser(userId), HttpStatus.OK);
     }
 
     @GetMapping("/logout")
     public ResponseEntity<String> logout(){
         return new ResponseEntity<>(userService.logout(), HttpStatus.OK);
+    }
+
+    @GetMapping("/viewPost/{id}")
+    public ResponseEntity<Post> viewPost(@PathVariable("id") Long userId){
+        return new ResponseEntity<>(userService.viewPost(userId), HttpStatus.OK);
     }
 }

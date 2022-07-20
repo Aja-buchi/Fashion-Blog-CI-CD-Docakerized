@@ -16,8 +16,8 @@ public interface UserService {
     User login(UserSignUpDto userSignUpDto);
     String logout();
     Post viewPost(Long id);
-    List<Post> getAllPost();
+
     User fetchUser(Long id);
-    PostLikes likes(PostLikesDto postLikesDto);
-    PostComments comments(PostCommentsDto postCommentsDto);
+    String likes(PostLikesDto postLikesDto);
+    String comments(PostCommentsDto postCommentsDto);
 }

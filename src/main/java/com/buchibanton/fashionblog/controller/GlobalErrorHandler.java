@@ -1,9 +1,6 @@
 package com.buchibanton.fashionblog.controller;
 
-import com.buchibanton.fashionblog.exceptions.PostAlreadyExists;
-import com.buchibanton.fashionblog.exceptions.PostNotFoundException;
-import com.buchibanton.fashionblog.exceptions.UserAlreadyExists;
-import com.buchibanton.fashionblog.exceptions.UserNotFoundException;
+import com.buchibanton.fashionblog.exceptions.*;
 import com.buchibanton.fashionblog.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +41,31 @@ public class GlobalErrorHandler {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage(ex.getMessage());
         errorResponse.setDebugMessage("This post does not exist");
+        errorResponse.setStatus(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, errorResponse.getStatus());
+    }
+
+    @ExceptionHandler(AdminNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAdminNotFoundException(final AdminNotFoundException ex){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setDebugMessage("Admin does not exist");
+        errorResponse.setStatus(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, errorResponse.getStatus());
+    }
+    @ExceptionHandler(PostCommentAlreadyExists.class)
+    public ResponseEntity<ErrorResponse> handlePostCommentAlreadyExistsException(final PostCommentAlreadyExists ex){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setDebugMessage("Admin does not exist");
+        errorResponse.setStatus(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, errorResponse.getStatus());
+    }
+    @ExceptionHandler(InvalidEmailException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidEmailException(final InvalidEmailException ex){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setDebugMessage("Admin does not exist");
         errorResponse.setStatus(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(errorResponse, errorResponse.getStatus());
     }

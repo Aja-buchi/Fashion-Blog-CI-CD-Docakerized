@@ -4,6 +4,7 @@ import com.buchibanton.fashionblog.dto.PostCommentsDto;
 import com.buchibanton.fashionblog.dto.PostDto;
 import com.buchibanton.fashionblog.dto.PostLikesDto;
 import com.buchibanton.fashionblog.dto.UserSignUpDto;
+import com.buchibanton.fashionblog.exceptions.PostCommentAlreadyExists;
 import com.buchibanton.fashionblog.exceptions.UserAlreadyExists;
 import com.buchibanton.fashionblog.exceptions.UserNotFoundException;
 import com.buchibanton.fashionblog.model.Post;
@@ -30,17 +31,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-
     private final PostCommentsRepository postCommentsRepository;
 
-
     private final PostLikesRepository postLikesRepository;
-
 
     private final HttpSession httpSession;
 
     private final PostRepository postRepository;
-
 
     @Override
     public User signUp(UserSignUpDto userSignUpDto) {
@@ -84,9 +81,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public List<Post> getAllPost() {
-        return postRepository.findAll();
+    public Long loginUserId(){
+        Long id = (Long) httpSession.getAttribute("found");
+        if (id==null){
+            throw new UserNotFoundException("User not found! kindly login");
+        }
+        return id;
     }
 
     @Override
@@ -99,16 +99,39 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("User with " + userId + " not found");
         }
     }
-//*****************************************************
+
     @Override
-    public PostLikes likes(PostLikesDto postLikesDto) {
+    public String likes(PostLikesDto postLikesDto) {
         PostLikes postLikes = new PostLikes();
-        return null;
+        Long likeId = loginUserId();
+        Optional<User> userOptional = userRepository.findUsersByUserId(likeId);
+        if (userOptional.isEmpty()){
+            throw new UserNotFoundException("Please login first");
+        }
+        else {
+            BeanUtils.copyProperties(postLikesDto, postLikes);
+            postLikesRepository.save(postLikes);
+        return "Thank you";
+        }
     }
 
     @Override
-    public PostComments comments(PostCommentsDto postCommentsDto) {
-        return null;
+    public String comments(PostCommentsDto postCommentsDto) {
+        Long commentId = loginUserId();
+        Optional<User> user = userRepository.findUsersByUserId(commentId);
+        if (user.isEmpty()){
+                throw new UserNotFoundException("Please log in first");
+        }else {
+            PostComments postComments = new PostComments();
+            Optional<PostComments> id = postCommentsRepository.findPostCommentsByCommentIdAndMessage(postComments.getCommentId(), postComments.getMessage());
+            if (id.isPresent()){
+                throw new PostCommentAlreadyExists("You have previously commented on this post");
+            }else {
+                BeanUtils.copyProperties(postCommentsDto, postComments);
+                postCommentsRepository.save(postComments);
+                return "Thank you for your comments";
+            }
+        }
     }
-//    ****************************************************
+
 }
