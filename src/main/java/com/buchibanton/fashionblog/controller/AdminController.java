@@ -6,9 +6,11 @@ import com.buchibanton.fashionblog.dto.UpdatePostDto;
 import com.buchibanton.fashionblog.model.Post;
 import com.buchibanton.fashionblog.model.PostComments;
 import com.buchibanton.fashionblog.model.PostLikes;
+import com.buchibanton.fashionblog.model.pageCriterias.PostPage;
 import com.buchibanton.fashionblog.repository.AdminRepository;
 import com.buchibanton.fashionblog.service.AdminService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +56,7 @@ public class AdminController {
     }
 
     @GetMapping("/getAllPost")
-    public ResponseEntity getAllPost(){
-        return new ResponseEntity<>(adminService.getAllPost(), HttpStatus.OK);
+    public ResponseEntity<Page<Post>> getAllPost(PostPage postPage){
+        return new ResponseEntity<>(adminService.getAllPost(postPage), HttpStatus.OK);
     }
 }

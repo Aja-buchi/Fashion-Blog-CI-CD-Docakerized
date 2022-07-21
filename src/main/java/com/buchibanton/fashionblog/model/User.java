@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "user_table")
 public class User {
@@ -33,17 +34,9 @@ public class User {
     @Size(min = 5, max = 15, message = "Password must be between 5 to 15 characters")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(
-            name = "post_id",
-            referencedColumnName = "postId"
-    )
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user1")
     private List<Post> post;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(
-            name = "comment_id",
-            referencedColumnName = "commentId"
-    )
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user1")
     private List<PostComments> postComments;
 }

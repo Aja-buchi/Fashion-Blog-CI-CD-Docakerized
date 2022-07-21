@@ -8,11 +8,16 @@ import com.buchibanton.fashionblog.exceptions.InvalidEmailException;
 import com.buchibanton.fashionblog.exceptions.PostNotFoundException;
 import com.buchibanton.fashionblog.exceptions.UserNotFoundException;
 import com.buchibanton.fashionblog.model.*;
+import com.buchibanton.fashionblog.model.pageCriterias.PostPage;
 import com.buchibanton.fashionblog.repository.*;
 import com.buchibanton.fashionblog.service.AdminService;
 import com.buchibanton.fashionblog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -42,8 +47,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Post> getAllPost() {
-        return postRepository.findAll();
+//   Implementing Pagination
+    public Page<Post> getAllPost(PostPage postPage) {
+        Sort sort = Sort.by(postPage.getSortDirection(), postPage.getSortBy());
+        Pageable pageable = PageRequest.of(postPage.getPageNumber(), postPage.getPageSize(), sort);
+        Page<Post> leads = postRepository.findAll(pageable);
+        return leads;
     }
 
     @Override

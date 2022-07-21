@@ -13,11 +13,16 @@ import java.util.List;
 
 public interface UserService {
     User signUp(UserSignUpDto userSignUpDto);
+
     User login(UserSignUpDto userSignUpDto);
+
     String logout();
+
     Post viewPost(Long id);
 
     User fetchUser(Long id);
+
     String likes(PostLikesDto postLikesDto);
+
     String comments(PostCommentsDto postCommentsDto);
 }

@@ -17,10 +17,6 @@ public class PostComments {
     private Long commentId;
     private String message;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "userId"
-    )
-    private User user;
+    @ManyToOne
+    private User user1;
 }

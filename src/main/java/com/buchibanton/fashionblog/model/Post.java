@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long postId;
 
     private String title;
@@ -20,17 +20,9 @@ public class Post {
     private LocalDateTime updated = LocalDateTime.now();
     private LocalDateTime deleted = LocalDateTime.now();
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "admin_id",
-            referencedColumnName = "adminId"
-    )
-    private Admin admin;
+    @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
+    private Admin admin1;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "userId"
-    )
-    private User user;
+    @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    private User user1;
 }

@@ -1,5 +1,7 @@
 package com.buchibanton.fashionblog.controller;
 
+import com.buchibanton.fashionblog.dto.PostCommentsDto;
+import com.buchibanton.fashionblog.dto.PostLikesDto;
 import com.buchibanton.fashionblog.dto.UserSignUpDto;
 import com.buchibanton.fashionblog.exceptions.UserNotFoundException;
 import com.buchibanton.fashionblog.model.Post;
@@ -40,5 +42,15 @@ public class UserController {
     @GetMapping("/viewPost/{id}")
     public ResponseEntity<Post> viewPost(@PathVariable("id") Long userId){
         return new ResponseEntity<>(userService.viewPost(userId), HttpStatus.OK);
+    }
+
+    @PostMapping("/likes")
+    public ResponseEntity<String> likes(@RequestBody PostLikesDto postLikesDto){
+        return new ResponseEntity<>(userService.likes(postLikesDto), HttpStatus.OK);
+    }
+
+    @PostMapping("/comments")
+    public ResponseEntity<String> comments(@RequestBody PostCommentsDto postCommentsDto){
+        return new ResponseEntity<>(userService.comments(postCommentsDto), HttpStatus.OK);
     }
 }
