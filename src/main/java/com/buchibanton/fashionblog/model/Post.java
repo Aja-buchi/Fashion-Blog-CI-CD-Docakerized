@@ -34,9 +34,9 @@ public class Post {
     @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private User user1;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post")
     private List<PostLikes> postLikes;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "posts")
     private List<PostComments> postComments;
 }

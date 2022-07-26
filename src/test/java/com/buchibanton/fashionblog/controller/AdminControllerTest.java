@@ -13,6 +13,7 @@ import com.buchibanton.fashionblog.dto.PostDto;
 import com.buchibanton.fashionblog.dto.UpdatePostDto;
 import com.buchibanton.fashionblog.model.Admin;
 import com.buchibanton.fashionblog.model.Post;
+import com.buchibanton.fashionblog.model.PostLikes;
 import com.buchibanton.fashionblog.model.User;
 import com.buchibanton.fashionblog.model.pageCriterias.PostPage;
 import com.buchibanton.fashionblog.repository.AdminRepository;
@@ -98,7 +99,7 @@ class AdminControllerTest {
         user.setPassword("iloveyou");
         user.setPost(new ArrayList<>());
         user.setPostComments(new ArrayList<>());
-        user.setPostLikes(new ArrayList<>());
+        user.setPostLikes(new PostLikes());
         user.setUserId(123L);
         user.setUserName("janedoe");
 
