@@ -1,4 +1,4 @@
-package com.buchibanton.fashionblog.service;
+package com.buchibanton.fashionblog.service.serviceImpl;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;

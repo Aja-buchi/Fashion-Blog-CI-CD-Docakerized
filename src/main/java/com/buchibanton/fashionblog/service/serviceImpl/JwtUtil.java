@@ -1,4 +1,4 @@
-package com.buchibanton.fashionblog.service;
+package com.buchibanton.fashionblog.service.serviceImpl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;

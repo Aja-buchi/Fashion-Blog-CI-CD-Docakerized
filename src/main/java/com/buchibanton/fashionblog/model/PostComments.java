@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
@@ -17,6 +18,8 @@ public class PostComments {
     private Long commentId;
     private String message;
 
+    @ManyToOne
+    private Post posts;
     @ManyToOne
     private User user1;
 }

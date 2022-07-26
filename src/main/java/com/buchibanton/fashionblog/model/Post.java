@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @Entity @Builder
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
@@ -31,4 +33,10 @@ public class Post {
 
     @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private User user1;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostLikes> postLikes;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostComments> postComments;
 }

@@ -1,7 +1,7 @@
 package com.buchibanton.fashionblog.filter;
 
-import com.buchibanton.fashionblog.service.JwtUtil;
-import com.buchibanton.fashionblog.service.MyUserDetailsService;
+import com.buchibanton.fashionblog.service.serviceImpl.JwtUtil;
+import com.buchibanton.fashionblog.service.serviceImpl.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

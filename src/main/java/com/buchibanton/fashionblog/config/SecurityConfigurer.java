@@ -1,9 +1,8 @@
 package com.buchibanton.fashionblog.config;
 
 import com.buchibanton.fashionblog.filter.JwtRequestFilter;
-import com.buchibanton.fashionblog.service.MyUserDetailsService;
+import com.buchibanton.fashionblog.service.serviceImpl.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
