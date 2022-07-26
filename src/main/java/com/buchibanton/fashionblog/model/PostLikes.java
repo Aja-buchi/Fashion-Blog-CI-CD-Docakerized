@@ -15,5 +15,9 @@ public class PostLikes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeId;
     private String status;
+
+    @ManyToOne
+    private User user1;
+
 }
 

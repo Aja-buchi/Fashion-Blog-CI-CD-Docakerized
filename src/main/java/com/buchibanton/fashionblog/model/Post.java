@@ -1,11 +1,14 @@
 package com.buchibanton.fashionblog.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 @Data
-@Entity
+@Entity @Builder
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "post_table")
 public class Post {
@@ -16,9 +19,12 @@ public class Post {
 
     private String title;
     private String description;
-    private LocalDateTime created = LocalDateTime.now();
-    private LocalDateTime updated = LocalDateTime.now();
-    private LocalDateTime deleted = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime createDate;
+    @UpdateTimestamp
+    private LocalDateTime updateDate;
+
+    private LocalDateTime deletedDate;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch =  FetchType.LAZY)
     private Admin admin1;

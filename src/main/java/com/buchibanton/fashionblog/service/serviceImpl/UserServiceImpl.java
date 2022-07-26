@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
         else {
             BeanUtils.copyProperties(postLikesDto, postLikes);
             postLikesRepository.save(postLikes);
-        return "Thank you";
+        return "liked";
         }
     }
 

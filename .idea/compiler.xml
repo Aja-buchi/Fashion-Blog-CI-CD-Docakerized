@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="week-nine-sq011a-Aja-buchi" target="17" />
+      <module name="week-nine-sq011a-Aja-buchi" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
