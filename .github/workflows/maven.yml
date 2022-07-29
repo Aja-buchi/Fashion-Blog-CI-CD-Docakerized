@@ -26,8 +26,8 @@ jobs:
       run: mvn clean install
 
     - name: Build & push Docker image
-     `uses: mr-smithers-excellent/docker-build-push@v5
-        with:
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
           image: ajaonyebuchi/new-springboot-images
           tags: latest
           registry: docker.io
