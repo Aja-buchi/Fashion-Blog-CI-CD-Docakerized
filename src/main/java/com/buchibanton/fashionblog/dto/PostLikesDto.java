@@ -12,6 +12,6 @@ public class PostLikesDto {
 
     private boolean status;
 
-//    @ManyToOne
-//    private User user1;
+    @ManyToOne
+    private User user1;
 }

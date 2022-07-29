@@ -18,8 +18,8 @@ public class PostLikes {
     private Long likeId;
     private String status;
 
-    @ManyToOne
-    private Post post;
+//    @ManyToOne
+//    private Post post;
 
     @OneToOne
     private User user1;
